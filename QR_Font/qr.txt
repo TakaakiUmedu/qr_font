@@ -1,0 +1,26 @@
+#!/usr/bin/fontforge -script
+
+
+New()
+Reencode("unicode")
+SelectAll()
+SetGlyphChanged(0)
+SetFontNames("QRFont", "QR Font", "QR Font", "Medium", "https://takaakiumedu.github.io/demo/qr_font/", "1.00")
+Import("svg/u*.svg", 0, 2)
+SelectAll()
+RoundToInt()
+SelectAll()
+RemoveOverlap()
+SelectAll()
+Simplify()
+Simplify()
+Simplify()
+Save("QRFont.ttf.sfd")
+Close()
+
+Open("QRFont.ttf.sfd")
+
+Generate("QRFont.ttf", "", 0x94)
+Generate("QRFont.woff2", "", 0x94)
+Close()
+Quit()

@@ -1,0 +1,28 @@
+#!/usr/bin/fontforge -script
+
+
+New()
+Reencode("unicode")
+SelectAll()
+SetGlyphChanged(0)
+SetFontNames("QRFontWithLetters", "QR Font with Letters", "QR Font with Letters", "Medium", "https://takaakiumedu.github.io/demo/qr_font/", "1.00")
+#BitmapsAvail([29])
+Import("svg/u*.svg", 0, 2)
+#SelectBitmap(29)
+SelectAll()
+RoundToInt()
+SelectAll()
+RemoveOverlap()
+SelectAll()
+Simplify()
+Simplify()
+Simplify()
+Save("QRFontWithLetters.ttf.sfd")
+Close()
+
+Open("QRFontWithLetters.ttf.sfd")
+
+Generate("QRFontWithLetters.ttf", "", 0x94)
+Generate("QRFontWithLetters.woff2", "", 0x94)
+Close()
+Quit()

@@ -1,2 +1,37 @@
 # qr_font
 QR Code Font
+
+- 各文字がQRコードになっているフォントを作るためのスクリプト
+  - 作成したフォントは以下で公開
+  - [https://takaakiumedu.github.io/demo/qr_font/](https://takaakiumedu.github.io/demo/qr_font/)
+- 3種類のフォントを作るフォルダ
+  - QR_Font
+  - QR_Font_Micro
+  - QR_Font_with_Letters
+- 実行前には以下のツールなどを、下記の通りに入手、設定
+  - [qrcode](https://pypi.org/project/qrcode/)
+    - QRコードの生成に利用
+    - 「pip install qrcode」などでインストールするPythonのライブラリ
+  - [qrtool](https://github.com/sorairolake/qrtool/)
+    - マイクロQRコードの生成に利用
+    - ダウンロードして、qr.pyから適当に呼び出せるように設定
+  - [FontForge](https://fontforge.org/en-US/)
+    - フォントファイルを作成するのに利用
+    - Ubuntuなら「apt install fontforge」などでインストール
+  - [PixelMplus（ピクセル・エムプラス）](https://itouhiro.hatenablog.com/entry/20130602/font)
+    - QR Font with Lettersに文字を入れるために利用
+    - qr.pyから10ピクセル版が読み込まれるように設定
+- 使い方
+  - それぞれのフォルダの下にさらにサブフォルダを準備
+    - QR FontとQR Font Microは、結果を保存する「svg」という名前のサブフォルダが必須。無いとエラー
+    - QR Font with Lettersは、結果を保存する「png」という名前のサブフォルダが必須。無いとエラー
+  - 各フォルダの「qr.py」を実行
+  - QR Font with Lettersのみ、「png」内の全ファイルを「png2svg.py」で「svg」フォルダへ変換
+    - フォントをSVGに書き込む方法や、FontForgeでビットマップフォントを作る方法がすぐに見つからなかったので、ドットの並びをSVGに変換するツールを自作
+    - 隣り合ったドットは1つの塊とし、直線を1本に繋ぐなどの最適化はしたつもり
+    - 一部の文字が欠ける不具合が発生
+      - 大きめのQRコードを使っている件と合わせて、True TypeかFontForgeの上限を超えたのか、試しに使ってみたWordの上限か、原因は突き詰めていないので不明
+      - SVG画像化する際に、より重要な周辺部から順に収録することで、欠けるとしたら中心部分になるように工夫
+      - 真ん中が一部潰れたとしてもエラー訂正で読み取れるし、ぱっと見、上手く行っているように見えたので、もうこれでいいかなと……
+  - 「fontforge -script qr.txt」でフォントファイルにまとめる
+  - 不要なファイルを消す

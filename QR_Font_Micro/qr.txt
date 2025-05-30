@@ -1,0 +1,26 @@
+#!/usr/bin/fontforge -script
+
+
+New()
+Reencode("unicode")
+SelectAll()
+SetGlyphChanged(0)
+SetFontNames("QRFontMicro", "QR Font Micro", "QR Font Micro", "Medium", "https://takaakiumedu.github.io/demo/qr_font/", "1.00")
+Import("svg/u*.svg", 0, 2)
+SelectAll()
+RoundToInt()
+SelectAll()
+RemoveOverlap()
+SelectAll()
+Simplify()
+Simplify()
+Simplify()
+Save("QRFontMicro.ttf.sfd")
+Close()
+
+Open("QRFontMicro.ttf.sfd")
+
+Generate("QRFontMicro.ttf", "", 0x94)
+Generate("QRFontMicro.woff2", "", 0x94)
+Close()
+Quit()
